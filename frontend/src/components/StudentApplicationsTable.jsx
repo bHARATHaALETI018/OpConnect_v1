@@ -16,7 +16,7 @@ const StudentApplicationsTable = (props) => {
   useEffect(() => {
     fetchApplications();
     fetchOpportunities();
-  });
+  }, []);
 
   const fetchOpportunities = async () => {
     try {
@@ -28,7 +28,7 @@ const StudentApplicationsTable = (props) => {
   };
 
   const fetchApplications = async () => {
-    setLoading(true);
+    // setLoading(true);
     try {
       if (props.student && props.student.token) {
         const config = {
@@ -51,7 +51,7 @@ const StudentApplicationsTable = (props) => {
         );
 
         setApplications(response.data);
-        setLoading(false);
+        // setLoading(false);
       }
     } catch (error) {
       console.log(error);
@@ -59,18 +59,20 @@ const StudentApplicationsTable = (props) => {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 3000,
       });
-      setLoading(false);
+      // setLoading(false);
     }
-    setLoading(false);
+    // setLoading(false);
   };
 
   const handleFilter = (e) => {
     e.preventDefault();
+    setLoading(true);
     fetchApplications();
     toast.success("Applications fetched successfully!", {
       position: toast.POSITION.BOTTOM_RIGHT,
       autoClose: 3000,
     });
+    setLoading(false);
   };
 
   const handleStatusChange = async (applicationId, newStatus) => {
@@ -83,10 +85,11 @@ const StudentApplicationsTable = (props) => {
         });
 
         fetchApplications();
-        setLoading(false);
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
   const companyNames = opportunities.map(
@@ -203,7 +206,7 @@ const StudentApplicationsTable = (props) => {
             </select>
           </div>
           <button
-            onClick={handleFilter}
+            onClick={(e) => handleFilter(e)}
             className="border bg-fourth border-second border-4 px-4 py-2 rounded-xl"
             disabled={loading}
           >

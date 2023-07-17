@@ -33,7 +33,7 @@ const AdminStats = () => {
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}api/student`);
+      const response = await axios.get(`${API_BASE_URL}/api/student`);
       setStudents(response.data);
     } catch (error) {
       console.error(error);

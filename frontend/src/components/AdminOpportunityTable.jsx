@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import Spinner from "./Spinner";
 import API_BASE_URL from "../config";
 
-const AdminOpportunityTable = (props) => {
+const AdminOpportunityTable = () => {
   const [opportunities, setOpportunities] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [titleFilter, setTitleFilter] = useState("");
@@ -27,16 +27,17 @@ const AdminOpportunityTable = (props) => {
         }
       );
       setOpportunities(response.data);
-      setLoading(false);
+      // setLoading(false);
     } catch (error) {
       console.log(error);
       toast.error(`${error.message}`, {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 3000,
       });
+      // setLoading(false);
+    } finally {
       setLoading(false);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -46,7 +47,7 @@ const AdminOpportunityTable = (props) => {
     }, 1000);
 
     return () => clearTimeout(delay);
-  });
+  }, []);
 
   if (isLoading) {
     return <Spinner />;

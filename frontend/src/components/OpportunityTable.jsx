@@ -12,6 +12,7 @@ const OpportunityTable = (props) => {
   const [appNumberFilter, setAppNumberFilter] = useState("");
   const [companyFilter, setCompanyFilter] = useState("");
   const [loading, setLoading] = useState(false);
+
   const fetchOpportunities = async () => {
     setLoading(true);
     try {
@@ -26,16 +27,17 @@ const OpportunityTable = (props) => {
         }
       );
       setOpportunities(response.data);
-      setLoading(false);
+      // setLoading(false);
     } catch (error) {
       console.log(error);
       toast.error(`${error.message}`, {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 3000,
       });
+      // setLoading(false);
+    } finally {
       setLoading(false);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -45,7 +47,7 @@ const OpportunityTable = (props) => {
     }, 1000);
 
     return () => clearTimeout(delay);
-  });
+  }, []);
 
   if (isLoading) {
     return <Spinner />;
