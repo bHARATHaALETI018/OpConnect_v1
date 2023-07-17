@@ -12,9 +12,9 @@ const FeedbackRoute = require("./routes/FeedbackRoute");
 const cors = require("cors");
 
 dotenv.config();
-connectDB();
-const app = express();
 const PORT = process.env.PORT;
+const app = express();
+connectDB();
 
 app.use(express.json()); // to accept json data
 app.use(cors());
