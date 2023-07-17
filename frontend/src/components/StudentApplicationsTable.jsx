@@ -15,7 +15,7 @@ const StudentApplicationsTable = (props) => {
   useEffect(() => {
     fetchApplications();
     fetchOpportunities();
-  }, []);
+  });
 
   const fetchOpportunities = async () => {
     try {

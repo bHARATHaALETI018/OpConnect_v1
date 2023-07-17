@@ -42,7 +42,7 @@ const AdminOpportunityTable = (props) => {
     }, 1000);
 
     return () => clearTimeout(delay);
-  }, []);
+  });
 
   if (isLoading) {
     return <Spinner />;

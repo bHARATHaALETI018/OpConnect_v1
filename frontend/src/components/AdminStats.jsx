@@ -317,6 +317,7 @@ const AdminStats = () => {
                           {app.student.pic ? (
                             <img
                               src={app.student.pic}
+                              alt={``}
                               className="rounded-full"
                             />
                           ) : (
@@ -388,7 +389,11 @@ const AdminStats = () => {
                       <td className="border px-4 py-2">{app.student.phone}</td>
                       <td className="border px-4 py-2 w-[9rem]">
                         {app.student.pic ? (
-                          <img src={app.student.pic} className="rounded-full" />
+                          <img
+                            src={app.student.pic}
+                            alt=""
+                            className="rounded-full"
+                          />
                         ) : (
                           "No Profile Pic"
                         )}
@@ -431,7 +436,11 @@ const AdminStats = () => {
                       <td className="border px-4 py-2">{student.phone}</td>
                       <td className="border px-4 py-2 w-[9rem]">
                         {student.pic ? (
-                          <img src={student.pic} className="rounded-full" />
+                          <img
+                            src={student.pic}
+                            alt=""
+                            className="rounded-full"
+                          />
                         ) : (
                           "No Profile Pic"
                         )}

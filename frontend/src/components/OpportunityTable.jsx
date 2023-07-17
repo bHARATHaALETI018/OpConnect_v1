@@ -41,7 +41,7 @@ const OpportunityTable = (props) => {
     }, 1000);
 
     return () => clearTimeout(delay);
-  }, []);
+  });
 
   if (isLoading) {
     return <Spinner />;
