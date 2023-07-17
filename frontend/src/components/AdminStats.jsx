@@ -4,6 +4,7 @@ import { FaCheck } from "react-icons/fa";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Oval } from "react-loader-spinner";
+import API_BASE_URL from "../config";
 
 const AdminStats = () => {
   const [applications, setApplications] = useState([]);
@@ -32,7 +33,7 @@ const AdminStats = () => {
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get("api/student");
+      const response = await axios.get(`${API_BASE_URL}api/student`);
       setStudents(response.data);
     } catch (error) {
       console.error(error);
@@ -41,7 +42,7 @@ const AdminStats = () => {
 
   const fetchOpportunities = async () => {
     try {
-      const response = await axios.get("/api/opportunities");
+      const response = await axios.get(`${API_BASE_URL}/api/opportunities`);
       setOpportunities(response.data);
     } catch (error) {
       console.error(error);
@@ -50,7 +51,7 @@ const AdminStats = () => {
 
   const fetchApplications = async () => {
     try {
-      const response = await axios.get("/api/applications/all");
+      const response = await axios.get(`${API_BASE_URL}/api/applications/all`);
       setApplications(response.data);
     } catch (error) {
       console.error(error);
@@ -59,7 +60,9 @@ const AdminStats = () => {
 
   const fetchAcceptedStudent = async () => {
     try {
-      const response = await axios.get("/api/applications/acceptedStudents");
+      const response = await axios.get(
+        `${API_BASE_URL}/api/applications/acceptedStudents`
+      );
       setSelectedStudents(response.data);
     } catch (error) {
       console.error(error);

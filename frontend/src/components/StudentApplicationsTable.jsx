@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Oval } from "react-loader-spinner";
 import axios from "axios";
+import API_BASE_URL from "../config";
 
 const StudentApplicationsTable = (props) => {
   const [applications, setApplications] = useState([]);
@@ -19,7 +20,7 @@ const StudentApplicationsTable = (props) => {
 
   const fetchOpportunities = async () => {
     try {
-      const response = await axios.get("/api/opportunities");
+      const response = await axios.get(`${API_BASE_URL}/api/opportunities`);
       setOpportunities(response.data);
     } catch (error) {
       console.error(error);
@@ -36,15 +37,18 @@ const StudentApplicationsTable = (props) => {
           },
         };
 
-        const response = await axios.get("/api/applications/filter", {
-          params: {
-            appNumber: appNumberFilter,
-            title: titleFilter,
-            companyName: companyFilter,
-            status: statusFilter,
-          },
-          headers: config.headers,
-        });
+        const response = await axios.get(
+          `${API_BASE_URL}/api/applications/filter`,
+          {
+            params: {
+              appNumber: appNumberFilter,
+              title: titleFilter,
+              companyName: companyFilter,
+              status: statusFilter,
+            },
+            headers: config.headers,
+          }
+        );
 
         setApplications(response.data);
         setLoading(false);
@@ -74,7 +78,7 @@ const StudentApplicationsTable = (props) => {
     try {
       console.log(`id: ${applicationId} and status: ${newStatus}`);
       if (props.student && props.student.token) {
-        await axios.put(`/api/applications/${applicationId}`, {
+        await axios.put(`${API_BASE_URL}/api/applications/${applicationId}`, {
           status: newStatus,
         });
 

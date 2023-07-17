@@ -3,6 +3,7 @@ import axios from "axios";
 import { Oval } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import Spinner from "./Spinner";
+import API_BASE_URL from "../config";
 
 const OpportunityTable = (props) => {
   const [opportunities, setOpportunities] = useState([]);
@@ -14,13 +15,16 @@ const OpportunityTable = (props) => {
   const fetchOpportunities = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("/api/opportunities/filter", {
-        params: {
-          appNumber: appNumberFilter,
-          title: titleFilter,
-          companyName: companyFilter,
-        },
-      });
+      const response = await axios.get(
+        `${API_BASE_URL}/api/opportunities/filter`,
+        {
+          params: {
+            appNumber: appNumberFilter,
+            title: titleFilter,
+            companyName: companyFilter,
+          },
+        }
+      );
       setOpportunities(response.data);
       setLoading(false);
     } catch (error) {
@@ -65,7 +69,7 @@ const OpportunityTable = (props) => {
         };
 
         await axios.post(
-          "/api/applications",
+          `${API_BASE_URL}/api/applications`,
           { opportunityId },
           { headers: config.headers }
         );

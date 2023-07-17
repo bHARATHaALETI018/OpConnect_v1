@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Oval } from "react-loader-spinner";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import API_BASE_URL from "../../config";
 
 const StudentSignup = () => {
   const [email, setEmail] = useState("");
@@ -88,7 +89,7 @@ const StudentSignup = () => {
         },
       };
       const { data } = await axios.post(
-        "/api/student",
+        `${API_BASE_URL}/api/student`,
         {
           email,
           password,

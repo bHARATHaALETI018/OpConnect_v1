@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Oval } from "react-loader-spinner";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import API_BASE_URL from "../config";
 
 const OpportunityCreate = () => {
   const [appNumber, setAppNumber] = useState("");
@@ -33,7 +34,7 @@ const OpportunityCreate = () => {
         },
       };
       await axios.post(
-        "/api/opportunities",
+        `${API_BASE_URL}/api/opportunities`,
         {
           appNumber,
           title,

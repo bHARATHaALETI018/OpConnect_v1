@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Oval } from "react-loader-spinner";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import API_BASE_URL from "../config";
 
 const FeedbackCollector = (props) => {
   const [description, setDescription] = useState("");
@@ -19,7 +20,7 @@ const FeedbackCollector = (props) => {
       return;
     }
     try {
-      await axios.post("/api/feedback", {
+      await axios.post(`${API_BASE_URL}/api/feedback`, {
         userId: props.user,
         description: description,
       });

@@ -1,14 +1,15 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
-const colors = require("colors");
+// const colors = require("colors");
 const StudentRoutes = require("./routes/StudentRoutes");
 const AdminRoutes = require("./routes/AdminRoutes");
 const OpportunityRoutes = require("./routes/OpportunityRoutes");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const ApplicationRoutes = require("./routes/ApplicationRoutes");
 const FeedbackRoute = require("./routes/FeedbackRoute");
-const path = require("path");
+// const path = require("path");
+const cors = require("cors");
 
 dotenv.config();
 connectDB();
@@ -16,6 +17,14 @@ const app = express();
 const PORT = process.env.PORT;
 
 app.use(express.json()); // to accept json data
+app.use(cors());
+
+const allowedOrigins = ["https://opconnect.netlify.app"];
+app.use(
+  cors({
+    origin: allowedOrigins,
+  })
+);
 
 app.get("/", (req, res) => {
   res.send("API is running!..");

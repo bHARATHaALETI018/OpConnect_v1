@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Oval } from "react-loader-spinner";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import API_BASE_URL from "../../config";
 
 const AdminSingup = () => {
   const [email, setEmail] = useState("");
@@ -86,7 +87,7 @@ const AdminSingup = () => {
       // console.log(print);
       //////////////////////////////
       const { data } = await axios.post(
-        "/api/admin",
+        `${API_BASE_URL}/api/admin`,
         {
           email,
           password,
