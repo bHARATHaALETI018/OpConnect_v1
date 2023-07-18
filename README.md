@@ -1,6 +1,6 @@
-## Introducing Application Monitor: A Powerful Opportunity Management Platform
+## Introducing OpportunityConnect-[OpConnect](https://opconnect.netlify.app): "Connecting Students with opportunities": A Powerful Opportunity Management Platform
 
-Application Monitor is an innovative web application designed to revolutionize the way opportunities are managed and tracked, catering to both teachers/admins and students. This comprehensive platform offers a seamless experience for creating, monitoring, and applying to various job opportunities, providing a gateway to new career possibilities.
+OpConnect is an innovative web application designed to revolutionize the way opportunities are managed and tracked, catering to both teachers/admins and students. This comprehensive platform offers a seamless experience for creating, monitoring, and applying to various job opportunities, providing a gateway to new career possibilities.
 
 For teachers/admins, Application Monitor offers a robust interface to effortlessly add job applications and opportunities. Teachers can easily manage and oversee the entire application process, allowing students to apply for the opportunities they post. With insightful KPIs and analytics at their fingertips, teachers can track the total number of students, applications, and much more, empowering them with valuable data-driven insights.
 
