@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { Oval } from "react-loader-spinner";
 import { toast } from "react-toastify";
@@ -13,7 +13,7 @@ const AdminOpportunityTable = () => {
   const [companyFilter, setCompanyFilter] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const fetchOpportunities = async () => {
+  const fetchOpportunities = useCallback(async () => {
     setLoading(true);
     try {
       const response = await axios.get(
@@ -27,27 +27,25 @@ const AdminOpportunityTable = () => {
         }
       );
       setOpportunities(response.data);
-      // setLoading(false);
     } catch (error) {
       console.log(error);
       toast.error(`${error.message}`, {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 3000,
       });
-      // setLoading(false);
     } finally {
       setLoading(false);
     }
-  };
-
+  }, [appNumberFilter, titleFilter, companyFilter]);
   useEffect(() => {
     fetchOpportunities();
+
     const delay = setTimeout(() => {
       setIsLoading(false);
     }, 1000);
 
     return () => clearTimeout(delay);
-  }, []);
+  }, [fetchOpportunities]);
 
   if (isLoading) {
     return <Spinner />;

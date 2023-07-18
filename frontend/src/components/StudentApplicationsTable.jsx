@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Oval } from "react-loader-spinner";
 import axios from "axios";
@@ -13,21 +13,7 @@ const StudentApplicationsTable = (props) => {
   const [companyFilter, setCompanyFilter] = useState("");
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    fetchApplications();
-    fetchOpportunities();
-  }, []);
-
-  const fetchOpportunities = async () => {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/api/opportunities`);
-      setOpportunities(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const fetchApplications = async () => {
+  const fetchApplications = useCallback(async () => {
     // setLoading(true);
     try {
       if (props.student && props.student.token) {
@@ -62,7 +48,25 @@ const StudentApplicationsTable = (props) => {
       // setLoading(false);
     }
     // setLoading(false);
-  };
+  }, [
+    appNumberFilter,
+    titleFilter,
+    companyFilter,
+    statusFilter,
+    props.student,
+  ]);
+  useEffect(() => {
+    const fetchOpportunities = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/api/opportunities`);
+        setOpportunities(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchApplications();
+    fetchOpportunities();
+  }, [fetchApplications]);
 
   const handleFilter = (e) => {
     e.preventDefault();

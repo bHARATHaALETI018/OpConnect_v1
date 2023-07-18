@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { FaCheck } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -24,41 +24,7 @@ const AdminStats = () => {
 
   const [filteredApplications, setFilteredApplications] = useState([]);
 
-  useEffect(() => {
-    fetchApplications();
-    fetchOpportunities();
-    fetchStudents();
-    fetchAcceptedStudent();
-  }, []);
-
-  const fetchStudents = async () => {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/api/student`);
-      setStudents(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const fetchOpportunities = async () => {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/api/opportunities`);
-      setOpportunities(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const fetchApplications = async () => {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/api/applications/all`);
-      setApplications(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const fetchAcceptedStudent = async () => {
+  const fetchAcceptedStudent = useCallback(async () => {
     try {
       const response = await axios.get(
         `${API_BASE_URL}/api/applications/acceptedStudents`
@@ -67,7 +33,44 @@ const AdminStats = () => {
     } catch (error) {
       console.error(error);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/api/student`);
+        setStudents(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    const fetchOpportunities = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/api/opportunities`);
+        setOpportunities(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    const fetchApplications = async () => {
+      try {
+        const response = await axios.get(
+          `${API_BASE_URL}/api/applications/all`
+        );
+        setApplications(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchApplications();
+    fetchOpportunities();
+    fetchStudents();
+    fetchAcceptedStudent();
+  }, [fetchAcceptedStudent]);
+
   // admin stats.
   const companyNames = opportunities.map(
     (opportunity) => opportunity.companyName
