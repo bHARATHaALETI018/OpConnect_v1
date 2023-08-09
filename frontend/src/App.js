@@ -9,7 +9,7 @@ const App = () => {
   return (
     <div className="min-h-screen bg-fifth text-white ">
       <div className="w-full text-center font-bold text-3xl p-6 bg-[#6A0DAD] top-0 sticky border-b border-b-2">
-        AppMonitor{" "}
+        OpConnect{" "}
         <span className="rounded-full absolute capitalize top-0 text-black outline outline-indigo-500 opacity-75 right-0 p-3 m-2 text-sm flex flex-col  bg-slate-100">
           <spam className="font-semibold">Developer</spam>
           <a
